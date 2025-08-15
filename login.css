@@ -1,0 +1,146 @@
+/* Fonts */
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Animated Gradient Background */
+body {
+  background: linear-gradient(270deg, #fcb1c3, #c2b7f7, #f7d6e0);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Layout */
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.left {
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
+}
+
+.brand {
+  font-family: 'Comfortaa', cursive;
+  font-size: 2.5rem;
+  color: white;
+  margin: 15px 0 5px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Glassmorphism Login Box */
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  width: 300px;
+  text-align: center;
+}
+
+.glass h2 {
+  font-family: 'Comfortaa', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+/* Inputs */
+form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* For username/password inputs */
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    max-width: 250px; /* Adjust as needed */
+}
+
+
+/* Button */
+form button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Sakura Petals */
+.petal {
+  position: fixed;
+  top: -10px;
+  border-radius: 50% 0 50% 50%;
+  opacity: 0.8;
+  
+  /*Multiple animations with independent transdorms */
+  animation: fall, sway, spin;
+  animation-timing-function: linear, ease-in-out, linear;
+  animation-iteration-count: infinite, infinite, infinite;
+}
+
+/* Combined animation that handles all transformations */
+@keyframes fall {
+  0% { 
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(20px) rotate(180deg);
+  }
+  100% { 
+    transform: translateY(110vh) translateX(0) rotate(360deg);
+  }
+}
+
+ .login-container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 100px;
+      max-width: 300px;
+
+}

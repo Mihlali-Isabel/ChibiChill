@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="dashboard.css">
+  <title>ChibiChill Dashboard</title>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="brand-group">
+      <div class="logo">ChibiChill</div>
+      <div class="subtitle">Stay cozy. Stay productive.</div>
+    </div>
+    <button id="minimal-btn" class="minimal-btn">Minimal Mode</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="greeting">Hi <span id="username">User</span></div>
+    <div class="datetime" id="datetime">Friday, 10:31 AM</div>
+    <div class="quote" id="quote">Do it now; sometimes 'later' becomes 'never'</div>
+    
+    <div class="controls">
+      <button id="new-quote" class="control-btn">New Quote</button>
+      <button id="rain-btn" class="control-btn">Rain Sounds</button>
+      <button id="traffic-btn" class="control-btn">Traffic Sounds</button>
+      <button id="pomodoro-btn" class="control-btn">Pomodoro Timer</button>
+      <button id="wallpaper-btn" class="control-btn">Change Background</button>
+      <button id="reset-bg" class="control-btn">Reset Background</button>
+    </div>
+
+    <!-- Wallpaper Selector -->
+    <div class="wallpapers" id="wallpapers">
+      <!-- Thumbnails will be added by JS -->
+    </div>
+  </div>
+
+  <script>
+    // ===== USERNAME =====
+    document.getElementById('username').textContent = 
+      localStorage.getItem('username') || 'User';
+
+    // ===== DATE/TIME =====
+    function updateDateTime() {
+      const now = new Date();
+      const options = { 
+        weekday: 'long', 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      };
+      document.getElementById('datetime').textContent = 
+        now.toLocaleDateString('en-US', options);
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    // ===== QUOTE GENERATOR =====
+    const quotes = [
+      "Do it now; sometimes 'later' becomes 'never'",
+      "Believe in the me that believes in you!",
+      "All our dreams can come true, if we have the courage to pursue them",
+      "The only thing we have to fear is fear itself.",
+      "It always seems impossible until it's done.",
+      "Life has no limitations, except for the ones you make.",
+      "Be yourself, everyone else is already taken"
+    ];
+    
+    function getRandomQuote() {
+      return quotes[Math.floor(Math.random() * quotes.length)];
+    }
+    
+    document.getElementById('new-quote').addEventListener('click', () => {
+      document.getElementById('quote').textContent = getRandomQuote();
+    });
+
+    // ===== SOUND PLAYER =====
+    const sounds = {
+      rain: "sounds/calming-rain.mp3",
+      traffic: "sounds/traffic-in-city.mp3"
+    };
+
+    let currentAudio = null;
+    let currentSound = null;
+    
+    function playSound(sound) {
+      if (currentSound === sound) {
+        if (currentAudio) {
+          currentAudio.pause();
+          currentAudio = null;
+        }
+        document.getElementById(`${sound}-btn`).classList.remove('active');
+        currentSound = null;
+        return;
+      }
+      
+      if (currentAudio) {
+        currentAudio.pause();
+        document.querySelector('.control-btn.active')?.classList.remove('active');
+      }
+      
+      currentAudio = new Audio(sounds[sound]);
+      currentAudio.loop = true;
+      currentAudio.play()
+        .then(() => {
+          currentSound = sound;
+          document.getElementById(`${sound}-btn`).classList.add('active');
+        })
+        .catch(error => {
+          console.error("Error playing sound:", error);
+        });
+    }
+    
+    document.getElementById('rain-btn').addEventListener('click', () => {
+      playSound('rain');
+    });
+    
+    document.getElementById('traffic-btn').addEventListener('click', () => {
+      playSound('traffic');
+    });
+
+    // ===== POMODORO BUTTON =====
+    document.getElementById('pomodoro-btn').addEventListener('click', () => {
+      window.location.href = 'pomodoro.html';
+    });
+
+    // ===== WALLPAPER CHANGER =====
+    const wallpapers = [
+      'ponyo.jpeg',
+      'busy.jpeg',
+      'house.jpeg',
+      'chill.jpeg',
+      'Porco-Rosso.jpeg',
+      'Jiro.jpeg',
+      'cats.jpeg',
+      'desk.jpeg',
+      'hero.jpeg',
+      'MyNeighbor.jpeg',
+      'WotH.jpeg',
+      'wallpaper.jpeg',
+    ];
+    
+    // Create thumbnail buttons
+    const wallpaperContainer = document.getElementById('wallpapers');
+    wallpapers.forEach(wp => {
+      const thumb = document.createElement('div');
+      thumb.className = 'wallpaper-thumb';
+      thumb.style.backgroundImage = `url(images/${wp})`;
+      thumb.addEventListener('click', () => {
+        document.body.className = 'wallpaper-mode';
+        document.body.style.backgroundImage = `url(images/${wp})`;
+        localStorage.setItem('currentBackground', `url(images/${wp})`);
+        localStorage.setItem('bgMode', 'wallpaper');
+      });
+      wallpaperContainer.appendChild(thumb);
+    });
+    
+    // Load saved background
+    function loadBackground() {
+      const bgMode = localStorage.getItem('bgMode');
+      const savedBg = localStorage.getItem('currentBackground');
+      
+      if (bgMode === 'wallpaper' && savedBg) {
+        document.body.className = 'wallpaper-mode';
+        document.body.style.backgroundImage = savedBg;
+      } else {
+        applyDefaultBackground();
+      }
+    }
+    
+    function applyDefaultBackground() {
+      document.body.className = '';
+      document.body.style.backgroundImage = '';
+      localStorage.setItem('bgMode', 'gradient');
+    }
+    
+    document.getElementById('reset-bg').addEventListener('click', applyDefaultBackground);
+    
+    // Initialize background
+    loadBackground();
+
+    // Toggle wallpaper selector
+    document.getElementById('wallpaper-btn').addEventListener('click', () => {
+      wallpaperContainer.style.display = 
+        wallpaperContainer.style.display === 'grid' ? 'none' : 'grid';
+    });
+
+    // ===== MINIMAL MODE =====
+    document.getElementById('minimal-btn').addEventListener('click', function() {
+      document.body.classList.toggle('minimal-mode');
+      this.textContent = document.body.classList.contains('minimal-mode') 
+        ? 'Normal Mode' 
+        : 'Minimal Mode';
+    });
+  </script>
+</body>
+</html>

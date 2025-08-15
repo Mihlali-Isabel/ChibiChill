@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+  <title>ChibiChill | Anime Productivity</title>
+  <link rel="stylesheet" href="login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+    <!-- Left Section -->
+    <div class="left">
+      <img src="Chibichill-Logo.png" alt="ChibiChill Logo" class="logo">
+      <h1 class="brand">ChibiChill</h1>
+      <p class="tagline">Stay cozy. Stay productive.</p>
+    </div>
+
+  <!--Right Section of login form-->
+    <div class="right glass">
+    <h2>Welcome Back!</h2>
+    <form>
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+ <!-- Sakura Petals -->
+  <div id="sakura-container"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('sakura-container');
+
+  const colors = [
+    '#ffc1cc', '#ffe4e1', '#fffafa', '#ffb7c5', '#fddde6'
+  ];
+
+  function createPetal(isGust = false) {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+
+    // Random depth (1 = far, 3 = close)
+    const depth = Math.floor(Math.random() * 3) + 1;
+
+    // Size based on depth
+    const size = (depth * 4) + (Math.random() * 3);
+    petal.style.width = `${size}px`;
+    petal.style.height = `${size}px`;
+
+    // Random horizontal position
+    petal.style.left = `${Math.random() * 100}vw`;
+
+    // Speed based on depth (gusts are faster)
+    const speedMultiplier = isGust ? 0.7 : 1;
+    const fallSpeed = `${((10 / depth) + (Math.random() * 3)) * speedMultiplier}s`; 
+    const swaySpeed = `${((4 / depth) + (Math.random() * 2)) * speedMultiplier}s`; 
+    const spinSpeed = `${((5 / depth) + (Math.random() * 2)) * speedMultiplier}s`; 
+
+    petal.style.animationDuration = `${fallSpeed}, ${swaySpeed}, ${spinSpeed}`;
+    petal.style.animationDelay = `0s, 0s, 0s`;
+
+    // Sway distance (gusts sway more)
+    const swayMultiplier = isGust ? 1.5 : 1;
+    petal.style.setProperty('--sway-distance', `${((10 / depth) + Math.random() * 15) * swayMultiplier}px`);
+
+    // Color
+    petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+    // Blur & opacity for depth
+    petal.style.filter = `blur(${(3 - depth) * 1.2}px)`;
+    petal.style.opacity = `${0.6 + (depth * 0.15)}`;
+
+    container.appendChild(petal);
+
+    // Remove after falling
+    setTimeout(() => petal.remove(), parseFloat(fallSpeed) * 1000);
+  }
+
+  // Gentle breeze — one petal every 300ms
+  setInterval(() => createPetal(false), 300);
+
+  // Gusts of wind every 8–12 seconds
+  function gust() {
+    const gustCount = Math.floor(Math.random() * 15) + 10; // 10–25 petals
+    for (let i = 0; i < gustCount; i++) {
+      setTimeout(() => createPetal(true), i * 100); // staggered burst
+    }
+    // Schedule next gust
+    setTimeout(gust, Math.random() * 4000 + 8000); // 8–12s
+  }
+  gust();
+});
+</script>
+<script src="main.js"></script>
+</body>
+</html>

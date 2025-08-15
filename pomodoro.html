@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pomodoro.css">
+  <title>Pomodoro App</title>
+</head>
+<body>
+  <div class="pomodoro-app">
+    <!-- Brand Header -->
+    <div class="brand-container">
+      <img src="Chibichill-Logo.png" alt="ChibiChill Logo" class="logo">
+      <div class="brand-text">ChibiChill</div>
+      <div class="tagline">Stay cozy. Stay productive.</div>
+    </div>
+
+    <!-- Timer Container -->
+    <div class="pomodoro-container">
+      <h1 class="pomodoro-title">pomodoro</h1>
+      <p class="pomodoro-subtitle">press start to begin</p>
+      
+      <div class="timer-circle">
+        <div class="progress-circle"></div>
+        <div class="timer-display">25:00</div>
+      </div>
+      
+      <div class="timer-buttons">
+        <button class="timer-btn start-btn">start</button>
+        <button class="timer-btn reset-btn">reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

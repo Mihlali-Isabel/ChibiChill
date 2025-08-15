@@ -1,0 +1,318 @@
+/* Animated Gradient Background */
+body {
+  background: linear-gradient(270deg, #fcb1c3, #c2b7f7, #f7d6e0);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+  transition: background 0.5s ease, animation 0.5s ease;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Quote styling */
+.quote {
+  position: relative;
+  padding: 0 1em;
+}
+
+.quote::before,
+.quote::after {
+  content: '"';
+  color: white;
+  font-size: 1.2em;
+}
+
+/* Sound button active state */
+.control-btn.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* When a wallpaper is selected */
+body.has-wallpaper {
+  animation: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Wallpaper thumbnails */
+.wallpapers {
+  display: none;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.wallpaper-thumb {
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.wallpaper-thumb:hover {
+  border-color: white;
+  transform: scale(1.05);
+}
+
+.wallpaper-thumb::after {
+  content: '×';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.wallpaper-thumb:hover::after {
+  opacity: 1;
+}
+
+/* Add this to your CSS */
+body {
+  transition: background 0.5s ease, background-color 0.5s ease;
+}
+
+.wallpaper-thumb {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #333; /* Thumbnail background */
+}
+
+/* CSS RESET */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+/* MAIN STYLES */
+body {
+  font-family: 'Inter', sans-serif;
+  height: 100vh;
+  color: white;
+  transition: all 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  position: relative;
+  background: linear-gradient(270deg, #fcb1c3, #c2b7f7, #f7d6e0);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+}
+
+body.wallpaper-mode {
+  animation: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.brand-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: white;
+  margin-top: -0.2rem;
+}
+
+.minimal-btn {
+  background: rgba(255,255,255,0.7);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  text-align: center;
+  margin: auto;
+  max-width: 800px;
+  width: 100%;
+}
+
+.greeting {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  color: white;
+  font-weight: 500;
+}
+
+.datetime {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.quote {
+  font-size: 1.4rem;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  color: white;
+  line-height: 1.6;
+  position: relative;
+  padding: 0 1em;
+}
+
+.quote::before,
+.quote::after {
+  content: '"';
+  color: rgba(255,255,255,0.7);
+  font-size: 1.2em;
+}
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+button {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(5px);
+  border: none;
+  color: #4a5568;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-size: 0.95rem;
+}
+
+button:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+button.active {
+  background: #4299e1;
+  color: white;
+}
+
+/* WALLPAPER SELECTOR */
+.wallpapers {
+  display: none;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  margin: 2rem auto 0;
+  max-width: 600px;
+  padding: 1rem;
+  background: rgba(0,0,0,0.7);
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.wallpaper-thumb {
+  height: 100px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.wallpaper-thumb:hover {
+  border-color: white;
+  transform: scale(1.05);
+}
+
+/* MINIMAL MODE */
+body.minimal-mode .main-content {
+  display: none;
+}
+
+body.minimal-mode .header {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  left: auto;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+body.minimal-mode .controls {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  left: auto;
+  justify-content: flex-end;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controls {
+    gap: 0.8rem;
+  }
+  
+  button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .quote {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .wallpapers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
